@@ -5,11 +5,12 @@
     <title>Document</title>
     <style type="text/css">
         .ng-cloak{display:none;}
+        .red{color:red;}
     </style>
 </head>
 <body ng-app="app" ng-cloak class="ng-cloak">
     <div ng-controller="ctr">
-        {{mobile}}
+        <h1 ng-class="{red:2>1}">{{mobile}}</h1>
         <button ng-click="func();">显示/隐藏手机号码</button>
     </div>
 </body>
@@ -30,13 +31,14 @@
                 }
                 arguments.callee.mark = !arguments.callee.mark;
                 if(arguments.callee.mark){
-                    $scope.mobile = $filter('truncate')($scope.mobileData, 11);
-                }else{
                     $scope.mobile = $filter('truncate')($scope.mobileData, 6);
+                }else{
+                    $scope.mobile = $filter('truncate')($scope.mobileData, 11);
                 }
             }
         });
     }]);
+    //自定义truncate过滤器
     m.filter('truncate', function(){
         return function(mobile, num){
             if(num==11){
