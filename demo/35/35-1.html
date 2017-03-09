@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <a href="javascript:;" onclick="fn(this.innerHTML)">第一个</a>
+    <a href="javascript:;" onclick="fn(this.innerHTML)">第二个</a>
+
+    <input type="button" value="按钮" id="btn" />
+</body>
+</html>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript">
+    function fn(field){
+        if(arguments.callee.mark=='undefined'){
+            arguments.callee.mark = false;
+        }
+        arguments.callee.mark = !arguments.callee.mark;
+        console.log(field+arguments.callee.mark);
+        console.log(arguments);
+    }
+</script>

@@ -1,0 +1,14 @@
+<div class="ng-navbox">
+	<style type="text/css">
+		.ng-navbox-head a{display:inline-block;padding:5px 10px;font-size:14px;text-decoration:none;}
+		.active{background-color:#f00;color:#fff;}
+	</style>
+	<div class="ng-navbox-head">
+		<a href="javascript:;" ng-repeat="(key, value) in data" ng-class="{'active':$first}">{{value.title}}</a>
+	</div>
+	<div class="ng-navbox-content">
+		<ul ng-repeat="(k, v) in data" ng-style="{'display':$first?'block':'none'}" class="lists">
+			<li ng-repeat="(m, n) in v.data">{{n.title}}</li>
+		</ul>
+	</div>
+</div>

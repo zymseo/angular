@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .ng-cloak{display:none;}
+        td{height:30px;line-height:30px;padding:0px 10px;text-align:center;}
+    </style>
+</head>
+<body ng-app="app" ng-controller="ctrl" ng-cloak class="ng-cloak">
+    <table cellpadding="0" cellspacing="0" border="1">
+        <thead>
+        <tr>
+            <td>姓名</td>
+            <td>年龄</td>
+            <td>性别</td>
+            <td>手机号</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="v in data">
+            <td>{{v.user}}</td>
+            <td>{{v.age}}</td>
+            <td>{{v.sex}}</td>
+            <td>{{v.mobile|truncate:6}}</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript">
+    var m = angular.module('app', []);
+    m.controller('ctrl', ['$scope', function($scope){
+        $scope.data = [
+            {user:'张三', age:23, sex:'男', mobile:13126919232},
+            {user:'李四', age:26, sex:'女', mobile:15024407449},
+            {user:'王五', age:24, sex:'男', mobile:13293609908}
+        ];
+    }]);
+    m.filter('truncate', function(){
+        return function(mobile, len){
+            var len = len ? len : 3;
+            return String(mobile).substr(0, 11-len)+new String('*').repeat(len);
+        }
+    });
+</script>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>$window服务的实例</title>
+</head>
+<body ng-app="app" ng-controller="ctr">
+	<button ng-click="func();">按钮</button>
+	您的选择是：{{message}}
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/demo.js"></script>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', []);
+	m.controller('ctr', ['$scope', '$window', function($scope, $window){
+		$scope.func = function(){
+			if($window.confirm('确认操作？')){
+				$scope.message = '您点击了确认';
+			}else{
+				$scope.message = '您点击了取消';
+			}
+		}
+	}])
+</script>

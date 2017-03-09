@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>$sce服务安全的处理html数据</title>
+	<style type="text/css">
+		.ng-cloak{display:none;}
+	</style>
+</head>
+<body ng-app="app" ng-controller="ctr" ng-cloak class="ng-cloak">
+	<div ng-bind="data1"></div>
+	<div ng-bind-html="data2"></div>
+	<div ng-bind-html="data1 | safeHtml"></div>
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/demo.js"></script>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', []);
+	m.controller('ctr', ['$scope', '$sce', function($scope, $sce){
+		$scope.data1 = '<h1>赵一鸣WEB前端开发学习笔记</h1>';
+		$scope.data2 = $sce.trustAsHtml('<h1>赵一鸣AngularJs学习笔记</h1>');	
+	}]);
+	m.filter('safeHtml', ['$sce', function($sce){
+		return function(htmlString){
+			return $sce.trustAsHtml(htmlString);
+		}
+	}]);
+</script>

@@ -1,0 +1,19 @@
+<style type="text/css">
+	td{height:30px;line-height:30px;padding:0 10px;border:1px solid #ccc;font-size:12px;text-align:center;}
+</style>
+<table cellpadding="0" cellspacing="0">
+	<thead>
+		<tr>
+			<td>ID</td>
+			<td>网站名称</td>
+			<td>网站地址</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="(key, value) in dataList">
+			<td>{{value.id}}</td>
+			<td><a ui-sref="article({id:value.id})">{{value.webname}}</a></td>
+			<td>{{value.weburl}}</td>
+		</tr>
+	</tbody>
+</table>

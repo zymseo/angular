@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style type="text/css">
+		.ng-cloak{display:none;}
+	</style>
+</head>
+<body ng-app="app" ng-controller="ctrl" ng-cloak class="ng-cloak">
+<!-- ng-selected 如果为true，则option被选中 -->
+<select>
+	<option>请选择</option>
+	<option ng-value="user.sex" ng-selected="user.sex==1">男</option>
+	<option ng-value="user.sex" ng-selected="user.sex==2">女</option>
+</select>
+<input type="radio" name="sex" ng-model="user.sex" ng-value="1" />男
+<input type="radio" name="sex" ng-model="user.sex" ng-value="2" />女
+	<hr />
+<!-- ng-disabled 如果为true，则不可编辑且置灰 -->
+<input type="checkbox" ng-model="copyright" />
+<input type="submit" ng-disabled="!copyright" />
+	<hr />
+<!-- ng-readonly 如果为true，则是只读，不可编辑 -->
+<input type="text" ng-readonly="user.sex" />
+<input type="text" ng-disabled="user.sex" />
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', []);
+	m.controller('ctrl', ['$scope', function($scope){
+		$scope.user = {'sex':1};
+	}]);
+</script>

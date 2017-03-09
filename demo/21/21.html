@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style type="text/css">
+		.ng-cloak{display:none;}
+	</style>
+</head>
+<body ng-app="app" ng-controller="ctrl" ng-cloak class="ng-clock">
+	<input type="text" ng-model="data" ng-model-options="{'updateOn':'default blur', 'debounce':{'default':3000, 'blur':0}}" />
+	
+	{{data}}
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', []);
+	m.controller('ctrl', ['$scope', function($scope){
+		
+	}]);
+</script>

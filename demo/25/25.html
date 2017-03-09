@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        li{list-style:none;}
+        .ng-cloak{display:none;background-color:red;}
+        .firstLevel{width:100px;float:left;text-align:center;}
+        .firstLevel li{height:30px;line-height:30px;}
+    </style>
+</head>
+<body ng-app="app" ng-controller="ctrl" ng-cloak class="ng-cloak">
+    <ul ng-class="{'firstLevel':true}" ng-repeat="v in data.button">
+        <span ng-bind="v.name" ng-click="addSecondLevel()"></span>
+        <li ng-repeat="s in v.sub_button">
+            <a ng-bind="s.name"></a>
+        </li>
+    </ul>
+    <!--添加一级菜单-->
+    <button ng-click="addFirstLevel()">添加一级菜单</button>
+    
+    <!-- 显示添加二级菜单 -->
+    <input type="text" ng-if="status" />
+</body>
+</html>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript">
+    var m = angular.module('app', []);
+    m.controller('ctrl', ['$scope', function($scope){
+        $scope.data = {
+            "button":[
+                {
+                    "type":"click",
+                    "name":"今日歌曲",
+                    "key":"V1001_TODAY_MUSIC"
+                },
+                {
+                    "name":"菜单",
+                    "sub_button":[
+                        {
+                            "type":"view",
+                            "name":"搜索",
+                            "url":"http://www.soso.com/"
+                        },
+                        {
+                            "type":"view",
+                            "name":"视频",
+                            "url":"http://v.qq.com/"
+                        },
+                        {
+                            "type":"click",
+                            "name":"赞一下我们",
+                            "key":"V1001_GOOD"
+                        }
+                    ]
+                }
+            ]
+        };
+
+        $scope.addFirstLevel = function(){
+            alert(1);
+        };
+        $scope.status = false;
+        $scope.addSecondLevel = function(){
+        	$scope.status = !$scope.status;
+        }
+    }]);
+</script>

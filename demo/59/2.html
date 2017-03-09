@@ -1,0 +1,15 @@
+<style type="text/css">
+	/*类名加ng前缀，说明这个类是用在angular中的，避免和其他样式混淆*/
+	.ng-box-title a{text-decoration:none;display:inline-block;padding:5px 10px;}
+	.ng-box-title a.active{color:#fff;background-color:#f00;}
+</style>
+<div class="ng-box">
+	<div class="ng-box-title">
+		<a href="javascript:;" ng-repeat="(key, value) in data" ng-class="{active:$first}">{{value.title}}</a>
+	</div>
+	<div class="ng-box-content">
+		<ul ng-repeat="(k, v) in data" ng-style="{display:$first?'block':'none'}">
+			<li ng-repeat="m in v.data">{{m.title}}</li>
+		</ul>
+	</div>
+</div>

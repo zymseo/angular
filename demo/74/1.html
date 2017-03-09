@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style type="text/css">
+		.ng-cloak{display:none;}
+	</style>
+</head>
+<body ng-app="app">
+	<a ui-sref="home">首页</a>
+	<a ui-sref="list">列表页</a>
+	<a ui-sref="articles">文章页</a>
+	<div ng-controller="ctr">
+		<a href="javascript:;" ng-click="func(5, 6);">点击跳转</a>
+	</div>
+	<div ui-view></div>
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular-ui-router.js"></script>
+<script type="text/javascript">
+	var c = 1;
+	var d = 2;
+	
+	var m = angular.module('app', ['ui.router']);
+	m.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider){
+		$urlRouterProvider.otherwise('/home');
+		$stateProvider.state('home', {
+			url : '/home',
+			templateUrl : './home.html',
+			controller : 'ctr'
+		})
+		.state('list', {
+			url : '/list',
+			templateUrl : './list.html',
+			controller : 'ctr'
+		})
+		.state('article', {
+			url : '/article/{id}',
+			templateUrl : './article.html',
+			controller : 'ctr'
+		})
+		.state('articles', {
+			url : '/articles',
+			params : {'c':'','d':''},
+			templateUrl : function($routerParams){
+				return './articles.html?c='+$routerParams.c+'&d='+$routerParams.d;
+			}
+		})
+	}]);
+	
+	m.controller('ctr', ['$scope', '$http', '$state', '$stateParams', function($scope, $http, $state, $stateParams){
+		
+		$scope.func = function(c, d){
+			$state.go('articles',{c:c, d:d});
+		}
+		
+		$scope.go = function(url){
+			$state.go(url);
+		}
+		
+		var obj = $http({
+			url : './1.php',
+			method : 'post'
+		}).then(function(result){
+			$scope.dataList = result.data;
+			return $scope.dataList;
+		});
+		
+		obj.then(function(result){
+			var webId = $stateParams.id;
+			if(webId){
+				for(var i=0; i<result.length; i++){
+					if(webId==result[i].id){
+						$scope.name = result[i].webname;
+					}
+				}
+			}
+		});
+		
+	}]);
+</script>

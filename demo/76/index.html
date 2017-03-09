@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>76.html</title>
+</head>
+<body ng-app="app">
+	<div class="nav">
+		<a ui-sref="home">首页</a>
+		<a ui-sref="list">列表页</a>
+		<a ui-sref="article">文章页</a>
+		<span ng-controller="listController">
+			<a href="javascript:;" ng-click="func(1, 2);">开始跳转</a>
+		</span>
+	</div>
+	<div ui-view></div>
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/demo.js"></script>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular-ui-router.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', ['ui.router']);
+	m.config(['$urlRouterProvider', '$stateProvider','$httpProvider', function($urlRouterProvider, $stateProvider, $httpProvider){
+		$urlRouterProvider.otherwise('/home');
+		$stateProvider.state('home', {
+			url : '/home',
+			templateUrl : function(){
+				return './home.html';
+			}
+		})
+		.state('list', {
+			url : '/list',
+			templateUrl : function(){
+				return './list.html';
+			},
+			controller : 'listController'
+		})
+		.state('article', {
+			url : '/article',
+			templateUrl : function(){
+				return './article.html';
+			}
+		})
+		.state('webMessage', {
+			url : '/webMessage/{id}',
+			templateUrl : function(){
+				return './web_message.html'
+			},
+			controller : 'listController'
+		})
+		.state('func', {
+			url : '/func',
+			params : {a:'', b:''},
+			templateUrl : function($routerParams){
+				return './func.html?a='+$routerParams.a+'&b='+$routerParams.b;
+			},
+			controller : 'listController'
+		})
+	}]);
+	
+	m.controller('listController', ['$scope', '$http', '$stateParams', '$state', function($scope, $http, $stateParams, $state){
+		var obj = $http({
+			url : './list.php',
+			method : 'post'
+		}).then(function(result){
+			$scope.webList = result.data;
+			return $scope.webList;
+		});
+		
+		obj.then(function(result){
+			var webId = $stateParams.id;
+			for(var i=0; i<result.length; i++){
+				if(result[i].webid==webId){
+					$scope.webName = result[i].webname;
+					break;
+				}
+			}
+		});
+		
+		$scope.func = function(a, b){
+			$state.go('func', {a:arguments[0], b:arguments[1]});
+		}
+		
+		$scope.param = $stateParams.b;
+	}]);
+</script>

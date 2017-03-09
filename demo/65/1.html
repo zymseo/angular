@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>$cacheFactory的缓存实例</title>
+	<style type="text/css">
+		.ng-cloak{display:none;}
+	</style>
+</head>
+<body ng-app="app" ng-cloak class="ng-cloak">
+	<div ng-controller="ctr1">
+		{{data}}
+	</div>
+	<div ng-controller="ctr2">
+		{{data}}
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/demo.js"></script>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', []);
+	m.controller('ctr1', ['$scope', '$cacheFactory', function($scope, $cacheFactory){
+		//通过$cacheFactory()来定义一个缓存；
+		var obj = $cacheFactory('zymBlog');
+		//通过put()将数据添加到缓存当中：
+		obj.put('user', {'name': '赵一鸣', 'work': 'WEB前端开发', 'sex': '男'});
+		obj.put('book', {'name': '赵一鸣AngularJs学习笔记'});
+		//通过get()来读取缓存：
+		$scope.data = obj.get('user').name;
+		//删除某一个缓存：
+		obj.remove('user');
+		console.log(obj.get('user'));//undefined
+		console.log(obj.get('book'));//object
+		//删除所有的缓存：
+		//obj.removeAll();
+		//console.log(obj.get('user'));//undefined
+		//console.log(obj.get('book'));//undefined
+	}]);
+	//控制器ctr2获取另一个控制器ctr1中的缓存
+	m.controller('ctr2', ['$scope', '$cacheFactory', function($scope, $cacheFactory){
+		var obj = $cacheFactory.get('zymBlog');
+		$scope.data = obj.get('book').name;//赵一鸣AngularJs学习笔记
+	}])
+</script>

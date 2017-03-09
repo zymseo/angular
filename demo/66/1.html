@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>$http服务获取后台数据</title>
+	<style type="text/css">
+		.ng-cloak{display:none;}
+	</style>
+</head>
+<body ng-app="app" ng-cloak class="ng-cloak">
+	<div ng-controller="ctr">
+		<button ng-click="func();">获取数据</button>
+		<table cellpadding="0" cellspacing="0" border="1">
+			<thead>
+				<tr>
+					<td>网站名称</td>
+					<td>网站地址</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="(key, value) in data">
+					<td>{{value.webname}}</td>
+					<td>{{value.weburl}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/demo.js"></script>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', []);
+	m.controller('ctr', ['$scope', '$http', function($scope, $http){
+		$scope.func = function(){
+			$http({
+				url : './1.php',
+				method : 'post'
+			}).then(function(result){
+				$scope.data = result.data;
+			}, function(result){
+				console.log(result);
+			});
+		}
+	}]);
+</script>

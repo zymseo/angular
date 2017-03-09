@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="app" ng-controller="ctr">
+	<zym-blog title="赵一鸣AngularJs学习笔记"></zym-blog>
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/demo.js"></script>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', []);
+	m.controller('ctr', ['$scope', function($scope){
+		$scope.data = [
+			{id: 1, title: 'SEO', data: [{id: 1, title: '用户需求分析'}, {id: 2, title: '数据分析'}]},
+			{id: 1, title: 'PHP', data: [{id: 1, title: '面向对象开发'}, {id: 2, title: '数据库优化'}]},
+			{id: 1, title: 'WEB前端开发', data: [{id: 1, title: 'javascript'}, {id: 2, title: 'html5+css3'}]}
+		];
+	}]);
+	m.directive('zymBlog', [function(){
+		return {
+			restrict : 'E',
+			templateUrl : './4.html',
+			replace : true,
+			/*controller : ['$scope', function($scope){
+				$scope.data = [
+					{id: 1, title: 'SEO', data: [{id: 1, title: '用户需求分析'}, {id: 2, title: '数据分析'}]},
+					{id: 1, title: 'PHP', data: [{id: 1, title: '面向对象开发'}, {id: 2, title: '数据库优化'}]},
+					{id: 1, title: 'WEB前端开发', data: [{id: 1, title: 'javascript'}, {id: 2, title: 'html5+css3'}]}
+				];
+			}],*/
+			link : function(scope, element, attr){
+				console.log(attr);
+				$(element).on('click', 'a', function(){
+					var $index = $(this).index();
+					$(this).addClass('active').siblings('a').removeClass('active');
+					$(element).find('.lists').eq($index).show().siblings('.lists').hide();
+				});
+			}
+		}
+	}]);
+</script>

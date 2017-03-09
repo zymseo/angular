@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>$scope.$apply()进行数据脏检查</title>
+	<style type="text/css">
+		.ng-cloak{display:none;}
+	</style>
+</head>
+<body ng-app="app" ng-controller="ctr" ng-cloak class="ng-clock">
+	{{name}}
+	<button ng-click="func();">按钮一</button>
+	<hr>
+	<button id="btn">按钮二</button>
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/demo.js"></script>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', []);
+	m.controller('ctr', ['$scope', function($scope){
+		$scope.name = '赵一鸣';
+		/*$scope.func = function(){
+			$scope.name = '赵一鸣个人技术博客';
+		}*/
+		$('#btn').click(function(){
+			$scope.name = '赵一鸣AngularJs学习笔记';
+			$scope.$apply();
+		});
+	}]);
+</script>

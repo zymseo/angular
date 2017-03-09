@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style type="text/css">
+		.ng-cloak{display:none;}
+	</style>
+</head>
+<body ng-app="app" ng-controller="ctrl" ng-cloak class="ng-cloak">
+	<form action="16.php" method="post">
+		<input type="text" name="title" ng-trim  />
+		<input type="submit" vlaue="提交" />
+	</form>
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript" src="http://www.zymseo.com/js/demo.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', []);
+	m.controller('ctrl', ['$scope', function($scope){
+		$scope.title = '赵一鸣';
+		$('form').submit(function(){
+			$('[name="title"]').val();
+		});
+	}]);
+</script>

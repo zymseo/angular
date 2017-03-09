@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="app">
+	<zym-blog title="赵一鸣AngularJs学习笔记" fontsize="30px" fontcolor="#f00"></zym-blog>
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/demo.js"></script>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', []);
+	m.directive('zymBlog', [function(){
+		return {
+			restrict : 'E',
+			scope : {
+				'title' : '@title',
+				'fontsize' : '@fontsize',
+				'fontcolor' : '@fontcolor'
+			},
+			link : function(scope, element, attr){
+				console.log(scope);
+				console.log(attr);
+				//$(element).text(scope.title).css({'color': scope.fontcolor, 'fontSize': scope.fontsize});
+				$(element).text(attr.title).css({'color': attr.fontcolor, 'fontSize': attr.fontsize});
+			}
+		}
+	}]);
+</script>

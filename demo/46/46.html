@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令</title>
+    <style type="text/css">
+        .ng-cloak{display:none;}
+    </style>
+</head>
+<body ng-app="app" >
+    <h1 zym-blog></h1>
+    <zym-blog></zym-blog>
+</body>
+</html>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript">
+    var m = angular.module('app', []);
+    m.directive('zymBlog', function() {
+        return {
+            restrict: 'AE',
+            template: '赵一鸣AngularJs学习笔记',
+        };
+    });
+</script>

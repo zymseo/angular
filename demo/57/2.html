@@ -1,0 +1,18 @@
+<div>
+	<table cellpadding="0" cellspacing="0" border="1">
+		<thead>
+			<tr>
+				<td>编号</td>
+				<td>姓名</td>
+				<td>年龄</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="(key, value) in data">
+				<td>{{value.id}}</td>
+				<td>{{value.name}}</td>
+				<td>{{value.age}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

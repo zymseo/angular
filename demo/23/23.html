@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style type="text/css">
+		.ng-cloak{display:none;}
+	</style>
+</head>
+<body ng-app="app" ng-controller="ctrl" ng-cloak class="ng-cloak">
+	<input type="text" ng-model="color" />
+	<input type="number" ng-model="num" />
+	<p ng-style="{'color':color, 'fontSize':num+'px'}">赵一鸣技术博客</p>
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', []);
+	m.controller('ctrl', ['$scope', function($scope){
+		
+	}]);
+</script>

@@ -1,0 +1,29 @@
+tyy6y7<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body ng-app="app">
+	<zym-blog></zym-blog>
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', []);
+	m.directive('zymBlog', [function(){
+		return {
+			restrict : 'AE',
+			templateUrl : './2.html',
+			replace : true,
+			controller : ['$scope', function($scope){
+				$scope.data = [
+					{id: 1, name: 'zym', age: 23},
+					{id: 2, name: 'zyy', age: 24},
+					{id: 3, name: 'zhangsan', age: 25},
+					{id: 4, name: 'lisi', age: 26}
+				]
+			}]
+		}
+	}]);
+</script>

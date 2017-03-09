@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>58</title>
+	<style type="text/css">
+		td{height:30px;line-height:30px;padding:0px 10px;text-align:center;font-size:12px;}
+	</style>
+</head>
+<body ng-app="app">
+	<zym-blog></zym-blog>
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/demo.js"></script>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', []);
+	m.directive('zymBlog', [function(){
+		return {
+			restrict : 'AEC',
+			templateUrl : './3.html',
+			controller : ['$scope', function($scope){
+				$scope.data = [
+					{name: '张三', age: 23, sex: '男'},
+					{name: '李四', age: 30, sex: '女'},
+					{name: '王五', age: 23, sex: '男'}
+				];
+			}],
+			replace : true
+		}
+	}]);
+</script>

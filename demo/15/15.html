@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.ng-cloak{display:none;}
+	</style>
+</head>
+<body ng-app="app" ng-controller="ctrl" ng-cloak class="ng-cloak">
+	<div id="wrap"></div>
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', []);
+	m.controller('ctrl', ['$scope', function($scope){
+		//判断数据是否为数组
+		console.log(angular.isArray([]));
+		//判断数据是否为日期
+		console.log(angular.isDate(new Date()));
+		//判断是否已经定义数据
+		var a;
+		console.log(angular.isDefined(a));
+		//判断是否未定义对象属性
+		var b = 123;
+		console.log(angular.isUndefined(b));
+		//判断是否是函数
+		console.log(angular.isFunction(function a(){}));
+		//判断是否是数字
+		console.log(angular.isNumber('1'));
+		//判断是否是字符串
+		console.log(angular.isString(1));
+		//判断是否是对象
+		console.log(angular.isObject({}));
+		//判断是否是元素
+		var c = document.getElementById('wrap');
+		console.log(angular.isElement(c));
+		//判断两个数据是否一样
+		console.log(angular.equals(1,1));
+	}]);
+</script>

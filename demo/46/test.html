@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style type="text/css">
+		.ng-cloak{display:none;}
+	</style>
+</head>
+<body ng-app="app" ng-cloak class="ng-cloak">
+	<div ng-controller="ctr1">
+		<input type="text" ng-model="name" />
+		<h1 zym-blog name="{{name}}"></h1>
+	</div>
+	<div ng-controller="ctr2">
+		<p>{{mobile | star : 3}}</p>
+	</div>
+	<div ng-controller="ctr3">
+		<table cellpadding="0" cellspacing="0" border="1">
+			<thead>
+				<tr>
+					<td>姓名</td>
+					<td>年龄</td>
+					<td>性别</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="v in data">
+					<td>{{v.name}}</td>
+					<td>{{v.age}}</td>
+					<td>{{v.sex}}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<select ng-options="v.value as v.name for v in data1" ng-model="city">
+			<option value="">--选择城市--</option>
+		</select>
+		{{city}}
+		<input type="text" value="AngularJs" ng-disabled="mark" />
+		<input type="checkbox" ng-model="mark" ng-true-value="1" ng-false-value="0" />
+		{{mark}}
+		
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', []);
+	m.controller('ctr1', ['$scope', function($scope){
+		$scope.name = 'zym';
+	}]);
+	m.directive('zymBlog', [function(){
+		return {
+			restrict : 'AEC',
+			template : '<p><input type="text" ng-model="name" /><span ng-transclude></span></p>',
+			replace : true,
+			transclude : true,
+			scope : true
+		}
+	}]);
+
+	m.controller('ctr2', ['$scope', function($scope){
+		$scope.mobile = 13126919251;
+	}]);
+	m.filter('star', function(){
+		return function(mobile, num){
+			return String(mobile).substr(0, 11-num) + new String('*').repeat(num);
+		}
+	});
+
+	m.controller('ctr3', ['$scope', function($scope){
+		$scope.data = [
+			{name : '张三', age : 23, sex : '男'},
+			{name : '李四', age : 24, sex : '女'},
+			{name : '王五', age : 25, sex : '男'},
+			{name : '赵六', age : 26, sex : '女'},
+			{name : '黄七', age : 27, sex : '男'}
+		];
+
+		$scope.data1 = [
+			{name : '北京', value : '1'},
+			{name : '上海', value : '2'},
+			{name : '广州', value : '3'},
+			{name : '深圳', value : '4'}
+		];
+
+	}]);
+
+	function Person(name, age, sex){
+		this.name = name;
+		this.age = age;
+		this.sex = sex;
+	}
+</script>

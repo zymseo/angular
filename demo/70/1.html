@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        td{height:30px;line-height:30px;border:1px solid #ccc;padding:0 10px;font-size:12px;text-align:center;}
+    </style>
+</head>
+<body ng-app="app">
+    <div ng-controller="ctr2">
+        <table cellpadding="0" cellspacing="0">
+            <thead>
+            <tr>
+                <td>网站名称</td>
+                <td>网站地址</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="(key, value) in data.data">
+                <td>{{value.webname}}</td>
+                <td>{{value.weburl}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <button ng-click="deleteAll();">删除所有数据</button>
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/demo.js"></script>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript">
+	var m = angular.module('app', []);
+	m.factory('zymBlog', ['$http', function($http){
+		return {
+			'arryData' : {'data': []},
+			'get' : function(){
+				var _this = this;
+				return $http({
+					'url' : './1.php',
+					'method' : 'post',
+				}).then(function(result){
+					_this.arryData.data = result.data;
+					return _this.arryData;
+				});
+			},
+			'removeAll' : function(){
+				var _this = this;
+				_this.arryData.data = [];
+			}
+		}
+	}]);
+	m.controller('ctr2', ['$scope', 'zymBlog', function($scope, zymBlog){
+		zymBlog.get().then(function(result){
+			$scope.data = result;
+		});
+		$scope.deleteAll = function(){
+			zymBlog.removeAll();
+		}
+	}]);
+</script>

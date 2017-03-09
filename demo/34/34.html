@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="app" ng-controller="ctrl" ng-cloak class="ng-cloak">
+    {{price|currency:'&':1}}
+    <hr>
+    {{price|number:1}}
+    <hr>
+    {{name|lowercase|uppercase}}
+    <hr>
+    {{data|limitTo:13:2}}<!--第一个参数是截取的字符数，第二个参数是从第几位开始截取-->
+    <hr>
+    {{time|date:'yyyy年mm月dd日 hh时mm分ss秒'}}
+    <hr>
+    {{user | orderBy : 'age' : true}}<!--true表示倒序，false表示升序，默认是升序-->
+    <hr>
+    {{user | filter : '张三' : true}}<!--true表示完全匹配-->
+</body>
+</html>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript">
+    var m = angular.module('app', []);
+    m.controller('ctrl', ['$scope', function ($scope) {
+        $scope.price = 1234.567;
+        $scope.name = 'ZYM';
+        $scope.data = '赵一鸣个人技术博客，网址：http://www.zymseo.com';
+        $scope.time = new Date().getTime();
+        $scope.user = [
+            {user:'张三', age:23, sex:'男'},
+            {user:'李四', age:26, sex:'女'},
+            {user:'王五', age:23, sex:'男'},
+        ];
+    }]);
+</script>

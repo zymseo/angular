@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style type="text/css">
+		.ng-cloak{display:none;}
+	</style>
+</head>
+<body ng-app="app">
+	<div>
+		<a ui-sref="home" ui-sref-opts="{reload:true}">首页</a>
+		<a ui-sref="pic" ui-sref-opts="{reload:true}">图片</a>
+		<div ui-view></div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/demo.js"></script>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular-ui-router.js"></script>
+
+<script type="text/javascript">
+	var m = angular.module('app', ['ui.router']);
+	m.config(['$urlRouterProvider', '$stateProvider','$httpProvider', function($urlRouterProvider, $stateProvider, $httpProvider){
+		$urlRouterProvider.otherwise('/home');
+		$stateProvider.state('home', {
+			url : '/home',
+			cache:'false',
+			method:'POST',	
+			templateUrl : './home.html',
+			controller:'ctr'
+		})
+		.state('pic', {
+			url : '/pic',
+			templateUrl : './pic.html'
+		})
+	}]);
+	m.controller('ctr', ['$scope', function($scope){
+		$scope.data = 123;
+	}]);
+</script>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .ng-cloak{display:none;}
+        td{height:30px;line-height:30px;padding:0px 10px;text-align:center;}
+    </style>
+</head>
+<body ng-app="app" ng-controller="ctr" ng-cloak class="ng-cloak">
+    <zym-blog text="赵一鸣AngularJs学习笔记" color="{{color}}" fontsize="{{fontsize}}"></zym-blog>
+</body>
+</html>
+<script type="text/javascript" src="http://www.zymseo.com/js/demo.js"></script>
+<script type="text/javascript" src="http://www.zymseo.com/js/angular.min.js"></script>
+<script type="text/javascript">
+    var m = angular.module('app', []);
+    m.controller('ctr', ['$scope', function($scope){
+        $scope.color = '#f00';
+        $scope.fontsize = '30px';
+    }]);
+    m.directive('zymBlog', [function(){
+        return {
+            restrict : 'E',
+
+            link : function(scope, element, attr){
+                $(element).text(attr.text).css({color: attr.color, fontSize: attr.fontsize});
+            }
+        }
+    }]);
+
+    var a = ['1','2','3','4','5','6','7','8','9','10','11'];
+    var num = Math.ceil(a.length/4);
+    var tmpArry = [];
+    for(var i=0; i<num; i++){
+        tmpArry.push(a.splice(0, 4));
+    }
+    console.log(tmpArry);
+</script>
