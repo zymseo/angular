@@ -33,7 +33,7 @@
                 if(arguments.callee.mark){
                     $scope.mobile = $filter('truncate')($scope.mobileData, 6);
                 }else{
-                    $scope.mobile = $filter('truncate')($scope.mobileData, 11);
+                    $scope.mobile = $scope.mobileData;
                 }
             }
         });
@@ -41,11 +41,7 @@
     //自定义truncate过滤器
     m.filter('truncate', function(){
         return function(mobile, num){
-            if(num==11){
-                return String(mobile);
-            }else{
-                return String(mobile).substr(0, 11-num) + String('*').repeat(num);
-            }
+            return String(mobile).substr(0, 11-num) + String('*').repeat(num);
         }
     });
 </script>
