@@ -1,50 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Document</title>
     <style type="text/css">
         .ng-cloak{display:none;}
-        td{height:30px;line-height:30px;padding:0px 10px;text-align:center;}
     </style>
 </head>
-<body ng-app="app" ng-controller="ctrl" ng-cloak class="ng-cloak">
-<table cellpadding="0" cellspacing="0" border="1">
-    <thead>
-    <tr>
-        <td>姓名</td>
-        <td ng-click="orderBy('age')">年龄</td>
-        <td>性别</td>
-        <td ng-click="orderBy('click')">点击</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="v in data">
-        <td>{{v.user}}</td>
-        <td>{{v.age}}</td>
-        <td>{{v.sex}}</td>
-        <td>{{v.click}}</td>
-    </tr>
-    </tbody>
-</table>
+<body ng-app="app" ng-cloak class="ng-cloak">
+    <div ng-controller="ctr">
+        {{mobile}}
+        <button ng-click="func();">显示/隐藏手机号码</button>
+    </div>
 </body>
 </html>
 <script type="text/javascript" src="../js/angular.min.js"></script>
 <script type="text/javascript">
     var m = angular.module('app', []);
-    m.controller('ctrl', ['$scope','$filter', function($scope, $filter){
-        $scope.data = [
-            {user:'张三', age:23, sex:'男', click:100},
-            {user:'李四', age:26, sex:'女', click:200},
-            {user:'王五', age:24, sex:'男', click:300},
-        ];
-        $scope.orderBy = function(field){
-            if(arguments.callee.mark=='undefined'){
-                arguments.callee.mark = false;
+    m.controller('ctr', ['$scope', '$http', '$filter', function($scope, $http, $filter){
+        $http({
+            url : 'data.php'
+        }).then(function(result){
+            $scope.mobileData = result.data;
+            $scope.mobile = $scope.mobileData;
+            //显示/隐藏手机号码方法
+            $scope.func = function(){
+                if(arguments.callee.mark=='undefined'){
+                    arguments.callee.mark = false;
+                }
+                arguments.callee.mark = !arguments.callee.mark;
+                if(arguments.callee.mark){
+                    $scope.mobile = $filter('truncate')($scope.mobileData, 11);
+                }else{
+                    $scope.mobile = $filter('truncate')($scope.mobileData, 6);
+                }
             }
-            arguments.callee.mark = !arguments.callee.mark;
-            $scope.data = $filter('orderBy')($scope.data, field, arguments.callee.mark);
-            console.log(field);
-        }
+        });
     }]);
+    m.filter('truncate', function(){
+        return function(mobile, num){
+            if(num==11){
+                return String(mobile);
+            }else{
+                return String(mobile).substr(0, 11-num) + String('*').repeat(num);
+            }
+        }
+    });
 </script>
