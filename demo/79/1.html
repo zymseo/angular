@@ -16,8 +16,10 @@
 </body>
 </html>
 <script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript" src="../js/angular-ui-router.js"></script>
 <script type="text/javascript">
-    var m = angular.module('app', []);
+    var m = angular.module('app', ['ui.router']);
+    //控制器
     m.controller('ctr', ['$scope', '$http', '$filter', function($scope, $http, $filter){
         $http({
             url : 'data.php'
