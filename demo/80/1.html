@@ -3,8 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style type="text/css">
+        .ng-cloak{display:none;}
+        ul{border:1px solid #ccc;display:none;}
+        li{list-style:none;height:30px;line-height:30px;cursor:pointer;}
+        li:hover{color:#f00;}
+    </style>
 </head>
-<body>
-
+<body ng-app="app" ng-controller="ctr" ng-cloak class="ng-cloak">
+    <input type="text" id="myEmail" ng-model="email" ng-change="func();" />
+    <ul id="list">
+        <li ng-repeat="(k, v) in data" onclick="chooseEmail(this)">{{email + v.name}}</li>
+    </ul>
+    <button id="btn" disabled>提交</button>
 </body>
 </html>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript">
+    var list = document.getElementById('list');
+    var m = angular.module('app', []);
+    m.controller('ctr', ['$scope', function($scope){
+        $scope.data = [
+            {
+                name : '@qq.com'
+            },
+            {
+                name : '@sina.com'
+            },
+            {
+                name : '@163.com'
+            }
+        ];
+        $scope.email = '';
+        $scope.func = function(){
+            var reg = new RegExp(/@/);
+            if(!reg.test($scope.email)){
+                list.style.display = 'block';
+                document.getElementById('btn').disabled = false;
+            }else{
+                list.style.display = 'none';
+                document.getElementById('btn').disabled = false;
+            }
+        }
+    }]);
+    function chooseEmail(This){
+        var myEmail = document.getElementById('myEmail');
+        myEmail.value = This.innerText;
+        list.style.display = 'none';
+    }
+</script>
