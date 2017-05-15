@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular</title>
+</head>
+<body ng-app="app">
+    <div class="nav">
+        <a ui-sref="index">首页</a>
+        <a ui-sref="list">栏目页</a>
+    </div>
+    <div ui-view></div>
+</body>
+</html>
+<script type="text/javascript" src="../js/angular-min.js"></script>
+<script type="text/javascript" src="../js/angular-ui-router.js"></script>
+<script type="text/javascript">
+    var app = angular.module('app', ['ui.router']);
+
+    app.filter('truncate', function(){
+        return function(mobile, len){
+            var len = len ? len : 3;
+            return String(mobile).substr(0, 11-len) + String('*').repeat(len);
+        }
+    });
+
+    /*
+        首页angular控制器
+    */
+    app.controller('indexCtr', ['$scope', '$http', '$state', function($scope, $http, $state){
+        $scope.userList = [];
+
+        //获取用户列表数据
+        $http({
+            url : './data.php'
+        }).then(function(result){
+            $scope.userList = result.data;
+        });
+
+        //删除用户
+        $scope.delete = function(id){
+            $scope.userList.splice(id, 1);
+        }
+    }]);
+
+    /*
+        列表页angular控制器
+    */
+    app.controller('listCtr', ['$scope', '$state', function($scope, $state){
+        $scope.goArticle = function(a, b){
+            $state.go('article', {a:a, b:b});
+        }
+    }]);
+
+    /*
+        文章页angular控制器
+    */
+    app.controller('articleCtr', ['$scope', '$stateParams', function($scope, $stateParams){
+        $scope.a = $stateParams.a;
+        $scope.b = $stateParams.b;
+    }]);
+
+    /*
+        路由
+    */
+    app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider){
+        $urlRouterProvider.otherwise('/index');
+        //首页路由
+        $stateProvider.state('index', {
+            url : '/index',
+            templateUrl : function($routerParams){
+                return './index.html';
+            },
+            controller : 'indexCtr'
+        })
+        //列表页路由
+        .state('list', {
+            url : '/list',
+            templateUrl : function($routerParams){
+                return './list.html';
+            },
+            controller : 'listCtr'
+        })
+        //文章页路由
+        .state('article', {
+            url : '/article',
+            params : {a:'', b:''},
+            templateUrl : function($routerParams){
+                var a = $routerParams.a ? $routerParams.a : 0;
+                var b = $routerParams.b ? $routerParams.b : 0;
+                return './article.html?a=' + $routerParams.a + '&b=' + $routerParams.b;
+            },
+            controller : 'articleCtr'
+        })
+    }]);
+</script>

@@ -1,0 +1,35 @@
+<style type="text/css">
+	td{
+		height:30px;
+		line-height:30px;
+		border:1px solid #ccc;
+		padding:0 10px;
+	}
+</style>
+<div>
+	<table cellpadding="0" cellspacing="0">
+		<thead>
+			<tr>
+				<td>ID</td>
+				<td>用户名</td>
+				<td>邮箱</td>
+				<td>电话</td>
+				<td>操作</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="(key, value) in userList">
+				<td>{{value.id}}</td>
+				<td>{{value.uname}}</td>
+				<td>{{value.email}}</td>
+				<td>{{value.tel | truncate : 5}}</td>
+				<td>
+					<a href="javascript:;" ng-click="delete(key)">删除</a>
+				</td>
+			</tr>
+			<tr ng-if="userList.length==0">
+				<td colspan="5">列表为空，赶紧去添加用户吧！</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

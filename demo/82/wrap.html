@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+	</head>
+	<body ng-app="app">
+		<div class="nav">
+			<a ui-sref="index">首页</a>
+			<a ui-sref="list">列表页</a>
+		</div>
+		<div ui-view></div>
+	</body>
+</html>
+<script type="text/javascript" src="./js/angular-min.js"></script>
+<script type="text/javascript" src="./js/angular-ui-router.js"></script>
+<script type="text/javascript">
+	var app = angular.module('app', ['ui.router']);
+
+	app.controller('listCtr', ['$scope', '$state', function($scope, $state){
+		$scope.toArticle = function(id){
+			$state.go('article', {id:id});
+		};
+		$scope.toUserList = function(){
+			$state.go('userList');
+		}
+	}]);
+
+	app.controller('articleCtr', ['$scope', '$stateParams', function($scope, $stateParams){
+		$scope.query = $stateParams;
+	}]);
+
+	app.controller('courseCtr', ['$scope', '$stateParams', function($scope, $stateParams){
+		$scope.query = $stateParams;
+	}]);
+
+	app.controller('userListCtr', ['$scope', '$http', function($scope, $http){
+		$http({
+			url : './userList.php'
+		}).then(function(result){
+			$scope.userList = result.data;
+		});
+		$scope.move = function($index, field){
+			if(field > 0){
+				$scope.userList[$index-1] = $scope.userList.splice($index, 1, $scope.userList[$index-1])[0];
+			}else{
+				$scope.userList[$index+1] = $scope.userList.splice($index, 1, $scope.userList[$index+1])[0];
+			}
+		}
+	}]);
+
+	app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider){
+		$urlRouterProvider.otherwise('/index');
+		$stateProvider.state('index', {
+			url : '/index',
+			templateUrl : function(){
+				return './index.html';
+			}
+		})
+		.state('list', {
+			url : '/list',
+			templateUrl : function(){
+				return './list.html';
+			},
+			controller : 'listCtr'
+		})
+		.state('list.login', {
+			url : '/login',
+			templateUrl : function(){
+				return './login.html';
+			}
+		})
+		.state('list.regist', {
+			url : '/regist',
+			templateUrl : function(){
+				return './regist.html';
+			}
+		})
+		.state('article', {
+			url : '/article/:id',
+			params : {id:''},
+			templateUrl : function($routeParams){
+				return './article.html?id=' + $routeParams.id;
+			},
+			controller : 'articleCtr'
+		})
+		.state('course', {
+			url : '/course/:courseId',
+			templateUrl : function(){
+				return './course.html';
+			},
+			controller : 'courseCtr'
+		})
+		.state('userList', {
+			url : '/userList',
+			templateUrl : function(){
+				return './userList.html'
+			},
+			controller : 'userListCtr'
+		})
+	}]);
+</script>

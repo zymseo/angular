@@ -1,0 +1,13 @@
+<div>
+	<h1>this is list.html</h1>
+	<div class="listNav">
+		<a ui-sref="list.login">登录</a>
+		<a ui-sref="list.regist">注册</a>
+		<a ui-sref="course({courseId:1})">我的课程</a>
+	</div>
+	<div>
+		<a href="javascript:;" ng-click="toArticle(1);">文章页</a>
+		<a href="javascript:;" ng-click="toUserList();">用户列表</a>
+	</div>
+	<div ui-view></div>
+</div>
