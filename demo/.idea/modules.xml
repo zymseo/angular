@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/angular.iml" filepath="$PROJECT_DIR$/.idea/angular.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../nodeStudy/.idea/nodeStudy.iml" filepath="$PROJECT_DIR$/../nodeStudy/.idea/nodeStudy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../nodeStudy/.idea/nodeStudy.iml" filepath="$PROJECT_DIR$/../../nodeStudy/.idea/nodeStudy.iml" />
+      <module fileurl="file://D:\wamp\www\angular\nodeStudy\.idea\nodeStudy.iml" filepath="D:\wamp\www\angular\nodeStudy\.idea\nodeStudy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../webpack_vue/.idea/webpack_vue.iml" filepath="$PROJECT_DIR$/../../webpack_vue/.idea/webpack_vue.iml" />
     </modules>
   </component>
 </project>

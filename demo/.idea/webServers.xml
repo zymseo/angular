@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8ebf9ea3-179b-40ba-ab46-e8f728eba31e" name="路上官网" url="http://hz197377.ftp.aliapp.com">
+        <fileTransfer host="hz197377.ftp.aliapp.com" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" forceListCommand="true" passiveMode="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="99a7ca20-6e53-424f-a6c6-b53a756971f7" name="博客" url="http://qxu1142020108.my3w.com">
+        <fileTransfer host="qxu1142020108.my3w.com" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

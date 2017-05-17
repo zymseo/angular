@@ -17,10 +17,10 @@
 				<td>{{v.uname}}</td>
 				<td>{{v.email}}</td>
 				<td>
-					<a href="javascript:;" ng-click="move(k, 1);" ng-if="k!=0">上移</a>
-					<span ng-if="k==0">上移</span>
-					<a href="javascript:;" ng-click="move(k, -1);" ng-if="k!=(userList.length-1)">下移</a>
-					<span ng-if="k==(userList.length-1)">下移</span>
+					<a href="javascript:;" ng-click="move(k, 1);" ng-show="k!=0">上移</a>
+					<span ng-show="k==0">上移</span>
+					<a href="javascript:;" ng-click="move(k, -1);" ng-show="k!=(userList.length-1)">下移</a>
+					<span ng-show="k==(userList.length-1)">下移</span>
 				</td>
 			</tr>
 		</tbody>
