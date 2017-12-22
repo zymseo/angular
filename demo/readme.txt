@@ -1,3 +1,4 @@
 {
-	"name": "zhaoyiming"
+	"name": "zhaoyiming",
+	"sex": "man"
 }
