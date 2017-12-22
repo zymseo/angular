@@ -1,6 +1,7 @@
 {
 	"name": "zhaoyiming",
-	"work": "web fe",
+	"age": 25,
 	"sex": "man",
-	"age": 25 
+	"work": "web fe",
+	"adress": "beijing"
 }
