@@ -1,4 +1,5 @@
 {
 	"name": "haha",
-	"age": 24
+	"age": 25,
+	"work": 'web前端开发'
 }
