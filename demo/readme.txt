@@ -1,6 +1,5 @@
-{
-  "name": "zhaoyiming"
-  "age": 25,
-  "sex": "man",
-  "work": "WEB前端开发"
-}
+111111
+
+2222222
+
+3333
