@@ -1,4 +1,5 @@
 {
 	"name": "zhaoyiming",
-	"work": "web fe"
+	"work": "web fe",
+	"sex": "man"
 }
