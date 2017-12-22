@@ -1,7 +1,6 @@
-test1test1test1test1test1test1test1test1test1test1test1test1
-
-test2test2test2test2test2test2
-
-test3
-
-testtesttest haha hehe
+{
+  "name": "zhaoyiming"
+  "age": 25,
+  "sex": "man",
+  "work": "WEB前端开发"
+}
