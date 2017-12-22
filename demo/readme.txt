@@ -1,4 +1,4 @@
-
+as
 {
 	"name": "zhaoyiming",
 	"work": "web fe",
@@ -6,3 +6,4 @@
 	"age": 25,
 	"sex": "man"
 }
+asdf
