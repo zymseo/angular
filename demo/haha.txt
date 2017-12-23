@@ -1,5 +1,5 @@
 {
-	"name": "haha",
+	"name": "test2",
 	"age": 25,
 	"work": 'web前端开发'
 }
