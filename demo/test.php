@@ -8,5 +8,5 @@
 
 $arry = array('1', '2', '3');
 
-$a = array_splice($arry, 0, 1, 'hello');
+$a = array_slice($arry, 0, 2);
 print_r($arry);
